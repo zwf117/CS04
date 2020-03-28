@@ -1,0 +1,74 @@
+C#企业级开发技术练习4答题卡
+
+班级：     19信息管理1班
+姓名：     祝晚芳
+学号：     20190307117
+
+注：请将答案放置在序号下方。*/
+
+（一）class Program
+    {
+        static BigInteger TotalMul(long start, long over)
+        {
+            BigInteger s;
+            s = 11 * 14 * 17 * 20 * 23;
+            for (long i = start; i >= over; i++)
+            {
+                s += i;
+            }
+            return s;
+        }
+        static void Main(string[] args)
+        {
+            Func<long, long, BigInteger> TotalM = TotalMul;
+            Console.WriteLine(TotalM(11, 23));
+        }
+    }
+
+
+（二）delegate decimal Totalcalc(decimal[] x);
+    class Program
+    {
+        static void TotalC(string strC, decimal[] a, Totalcalc funC)
+        {
+            Console.WriteLine($"{strC}:{funC(a)}");
+        }
+        static void Main(string[] args)
+        {
+            decimal[] scs = { 80, 72, 91, 52, 65 };
+            TotalC("最大值：", scs, delegate (decimal[] a)
+            {
+                return a.Max();
+            });
+            TotalC("最小值：", scs, delegate (decimal[] a)
+            {
+                return a.Min();
+            });
+        }
+    }
+
+
+（三）static void Main(string[] args)
+        {
+            Action<DateTime, int> DateChange = null;
+            DateChange= (t, d) =>Console.WriteLine($"{t.ToLongDateString()}" +$"{d}天之前是{t.AddDays(-d).ToLongDateString()}");
+            DateChange(new DateTime(2020,10,2), 5);
+        }
+
+
+（四）class Program
+    {
+        static void isPass(int[] scores, string info, Func<int[], int> funP)
+        {
+            int n = funP(scores);
+            Console.WriteLine($"{info}：{n}");
+        }
+        static void Main(string[] args)
+        {
+            int[] scs = { 90, 57, 62, 82, 39, 72 };
+            {
+                Console.Write("及格人数:");
+                Console.WriteLine(scs.Count(c => c > 60));
+            }
+        }
+    }
